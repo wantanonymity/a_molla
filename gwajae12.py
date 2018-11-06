@@ -6,10 +6,11 @@ words=str(r.text)
 a=words.find("Madam President, Mr. Secretary-General,")
 b=words.rfind("Thank you very much. Thank you. (Applause.)")
 
-before=words[a:b+len("Thank you very much. Thank you. (Applause.)")]
-
+before=words[a:b+len("Thank you very much. Thank you. (Applause.)")+1]
 before=before.replace('<p id="',' ')
 before=before.replace('</p>',' ')
+before=before.replace(',',' ')
+before=before.replace('.',' ')
 after=before.replace('">',' ')
 
 #print(after)
@@ -17,7 +18,7 @@ After=after.lower()
 word_list=After.split()
 
 mydict={}
-#word_list에 트럼프 연설문
+
 
 for w in word_list:
     if w in mydict:
@@ -25,12 +26,16 @@ for w in word_list:
     else:
         mydict[w]=1
 
-#print(sorted(mydict, key=mydict.__getitem__, reverse=True))
-
-#for i in range(1,21):
-#    print("%s:%s"%(sorted(mydict, key=mydict.__getitem__, reverse=True)[i+1],mydict[i]))
-
+L=[]
 
 for k in sorted(mydict, key=mydict.__getitem__, reverse=True):
+    L.append(k)
 
-    print("%s:%s"%(k,mydict[k]))
+NEWLIST=[]
+for i in range(20):
+    NEWLIST.append(L[i])
+
+    
+print("최다빈도순으로 단어 20개를 차례로 리스트에 append 시켰음: ",NEWLIST)
+
+
